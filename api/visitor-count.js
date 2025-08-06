@@ -1,9 +1,8 @@
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
 
-  const websiteId = "8b3ce781-d545-4fa6-84d0-17201616071a";
-  const token = "yEytBsvGwYdAOtvh";
-  const url = `https://umami-mas.vercel.app/api/websites/${websiteId}/stats`;
+  const url = "https://umami-mas.vercel.app/api/websites/8b3ce781-d545-4fa6-84d0-17201616071a/stats";
+  const token = "yEytBsvGwYdAOtvh"; 
 
   try {
     const response = await fetch(url, {
@@ -12,15 +11,20 @@ export default async function handler(req, res) {
       },
     });
 
-    if (!response.ok) throw new Error("API error");
+    if (!response.ok) {
+      console.error("Fetch failed:", response.status);
+      throw new Error("Failed to fetch stats");
+    }
 
     const data = await response.json();
     const visitors = data?.pageviews?.value ?? 0;
+
     res.status(200).json({ visitors });
   } catch (error) {
     console.error("Proxy error:", error.message);
     res.status(500).json({ error: "Failed to fetch stats" });
   }
 }
+
 
 
