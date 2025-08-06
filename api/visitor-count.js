@@ -1,8 +1,9 @@
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
 
-  const url = "https://umami-mas.vercel.app/api/websites/8b3ce781-d545-4fa6-84d0-17201616071a/stats";
   const token = "yEytBsvGwYdAOtvh"; 
+  const websiteId = "8b3ce781-d545-4fa6-84d0-17201616071a"; 
+  const url = `https://umami-mas.vercel.app/api/websites/${websiteId}/stats`;
 
   try {
     const response = await fetch(url, {
@@ -25,6 +26,7 @@ export default async function handler(req, res) {
     res.status(500).json({ error: "Failed to fetch stats" });
   }
 }
+
 
 
 
