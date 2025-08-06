@@ -1,0 +1,6 @@
+{
+  "name": "umami-proxy",
+  "version": "1.0.0",
+  "main": "api/share.js",
+  "type": "module"
+}
